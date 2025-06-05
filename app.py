@@ -137,6 +137,24 @@ def convert_between_kg_and_lb():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route("/convert_between_g_and_oz")
+def convert_between_g_and_oz():
+    try:
+        g = request.args.get("g")
+        oz = request.args.get("oz")
+        logging.info(f"g = {g}, oz = {oz}")
+
+        if g:
+            oz_val = float(g) / 28.3495
+            return jsonify({"oz": oz_val})
+        elif oz:
+            g_val = float(oz) * 28.3495
+            return jsonify({"g": g_val})
+        else:
+            return jsonify({"error": "請提供 g 或 oz"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
         
 if __name__ == "__main__":
 #    app.run(host="0.0.0.0", port=5000)
