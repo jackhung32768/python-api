@@ -37,6 +37,27 @@ def convert_between_celsius_and_fahrenheit():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route("/convert_between_inch_and_cm")
+def convert_between_inch_and_cm():
+    try:
+        inch = request.args.get("inch")
+        cm = request.args.get("cm")
+        logging.info(f"inch = {inch}")
+        logging.info(f"cm = {cm}")
+
+        if inch:
+            cm_val = float(inch) * 2.54
+            return jsonify({"cm": cm_val})
+        elif cm:
+            inch_val = float(cm) / 2.54
+            return jsonify({"inch": inch_val})
+        else:
+            return jsonify({"error": "請提供 inch 或 cm"}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
         
 if __name__ == "__main__":
 #    app.run(host="0.0.0.0", port=5000)
