@@ -79,6 +79,44 @@ def convert_between_mile_and_km():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
         
+@app.route("/convert_between_meter_and_foot")
+def convert_between_meter_and_foot():
+    try:
+        meter = request.args.get("meter")
+        foot = request.args.get("foot")
+        logging.info(f"meter = {meter}")
+        logging.info(f"foot = {foot}")
+
+        if meter:
+            foot_val = float(meter) * 3.28084
+            return jsonify({"foot": foot_val})
+        elif foot:
+            meter_val = float(foot) / 3.28084
+            return jsonify({"meter": meter_val})
+        else:
+            return jsonify({"error": "請提供 meter 或 foot"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+@app.route("/convert_between_yard_and_meter")
+def convert_between_yard_and_meter():
+    try:
+        yard = request.args.get("yard")
+        meter = request.args.get("meter")
+        logging.info(f"yard = {yard}")
+        logging.info(f"meter = {meter}")
+
+        if yard:
+            meter_val = float(yard) * 0.9144
+            return jsonify({"meter": meter_val})
+        elif meter:
+            yard_val = float(meter) / 0.9144
+            return jsonify({"yard": yard_val})
+        else:
+            return jsonify({"error": "請提供 yard 或 meter"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
         
 if __name__ == "__main__":
 #    app.run(host="0.0.0.0", port=5000)
