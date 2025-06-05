@@ -117,6 +117,26 @@ def convert_between_yard_and_meter():
             return jsonify({"error": "請提供 yard 或 meter"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route("/convert_between_kg_and_lb")
+def convert_between_kg_and_lb():
+    try:
+        kg = request.args.get("kg")
+        lb = request.args.get("lb")
+        logging.info(f"kg = {kg}")
+        logging.info(f"lb = {lb}")
+
+        if kg:
+            lb_val = float(kg) * 2.20462
+            return jsonify({"lb": lb_val})
+        elif lb:
+            kg_val = float(lb) / 2.20462
+            return jsonify({"kg": kg_val})
+        else:
+            return jsonify({"error": "請提供 kg 或 lb"}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
         
 if __name__ == "__main__":
 #    app.run(host="0.0.0.0", port=5000)
