@@ -58,6 +58,27 @@ def convert_between_inch_and_cm():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
+@app.route("/convert_between_mile_and_km")
+def convert_between_mile_and_km():
+    try:
+        mile = request.args.get("mile")
+        km = request.args.get("km")
+        logging.info(f"mile = {mile}")
+        logging.info(f"km = {km}")
+
+        if mile:
+            km_val = float(mile) * 1.60934
+            return jsonify({"km": km_val})
+        elif km:
+            mile_val = float(km) / 1.60934
+            return jsonify({"mile": mile_val})
+        else:
+            return jsonify({"error": "請提供 mile 或 km"}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+        
         
 if __name__ == "__main__":
 #    app.run(host="0.0.0.0", port=5000)
