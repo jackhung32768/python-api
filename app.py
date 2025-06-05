@@ -5,6 +5,8 @@ app = Flask(__name__)
 @app.route("/calc")
 def calc():
     try:
+        print("a=",a)
+        print("b=",b)
         a = float(request.args.get("a", 0))
         b = float(request.args.get("b", 0))
         result = a + b
