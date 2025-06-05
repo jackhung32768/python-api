@@ -155,6 +155,25 @@ def convert_between_g_and_oz():
             return jsonify({"error": "請提供 g 或 oz"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route("/convert_between_tonne_and_ton")
+def convert_between_tonne_and_ton():
+    try:
+        tonne = request.args.get("tonne")
+        ton = request.args.get("ton")
+        logging.info(f"tonne = {tonne}")
+        logging.info(f"ton = {ton}")
+
+        if tonne:
+            ton_val = float(tonne) * 1.10231
+            return jsonify({"ton": ton_val})
+        elif ton:
+            tonne_val = float(ton) / 1.10231
+            return jsonify({"tonne": tonne_val})
+        else:
+            return jsonify({"error": "請提供 tonne 或 ton"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
         
 if __name__ == "__main__":
 #    app.run(host="0.0.0.0", port=5000)
